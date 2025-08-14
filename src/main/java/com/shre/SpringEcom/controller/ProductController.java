@@ -24,4 +24,15 @@ public class ProductController{
     public ResponseEntity<List<Product>> getProducts(){
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("/product/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable int id) {
+        Product product = productService.getProductById(id);
+        if (product.getId() > 0) {
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
